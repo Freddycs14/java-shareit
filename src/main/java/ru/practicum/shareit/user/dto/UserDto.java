@@ -11,7 +11,7 @@ import javax.validation.constraints.*;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class UserDto {
-    Long id;
+    long id;
     String name;
     @Email
     @NotNull

@@ -16,9 +16,9 @@ import java.util.stream.Collectors;
 @Slf4j
 public class InMemoryItemStorage implements ItemStorage {
     private final Map<Long, Item> items = new HashMap<>();
-    private Long id = 1L;
+    private long id = 1;
 
-    private Long getNextId() {
+    private long getNextId() {
         return id++;
     }
 
@@ -33,7 +33,7 @@ public class InMemoryItemStorage implements ItemStorage {
     public Item update(Item item) {
         if (items.containsKey(item.getId())) {
             Item updateItem = items.get(item.getId());
-            if (updateItem.getId().equals(item.getId())) {
+            if (updateItem.getId() == (item.getId())) {
                 if (item.getOwner() == updateItem.getOwner()) {
                     if (item.getAvailable() != null) {
                         updateItem.setAvailable(item.getAvailable());
@@ -60,7 +60,7 @@ public class InMemoryItemStorage implements ItemStorage {
     }
 
     @Override
-    public Item getItemById(Long itemId) {
+    public Item getItemById(long itemId) {
         if (items.containsKey(itemId)) {
             return items.get(itemId);
         }
@@ -68,9 +68,9 @@ public class InMemoryItemStorage implements ItemStorage {
     }
 
     @Override
-    public List<Item> getUserItems(Long userId) {
+    public List<Item> getUserItems(long userId) {
         return items.values().stream()
-                .filter(item -> item.getOwner().getId().equals(userId))
+                .filter(item -> item.getOwner().getId() == userId)
                 .collect(Collectors.toList());
     }
 

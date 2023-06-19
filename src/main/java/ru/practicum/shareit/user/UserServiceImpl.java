@@ -22,12 +22,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void remove(Long userId) {
+    public void remove(long userId) {
         storage.remove(userId);
     }
 
     @Override
-    public User getUserById(Long userId) {
+    public User getUserById(long userId) {
         return storage.getUserById(userId);
     }
 

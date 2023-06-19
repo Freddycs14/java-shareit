@@ -22,7 +22,7 @@ public class ItemServiceImpl implements ItemService {
     private final UserStorage userStorage;
 
     @Override
-    public ItemDto create(Long userId, ItemDto itemDto) {
+    public ItemDto create(long userId, ItemDto itemDto) {
         checkUser(userId);
         User user = userStorage.getUserById(userId);
         Item item = itemMapper.toItem(itemDto, user);
@@ -31,7 +31,7 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public ItemDto update(Long id, Long userId, ItemDto itemDto) {
+    public ItemDto update(long id, long userId, ItemDto itemDto) {
         checkUser(userId);
         if (userId != itemStorage.getItemById(id).getOwner().getId()) {
             throw new UserNotFoundException("Только владелец может вносить измениния");
@@ -43,12 +43,12 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public ItemDto getItemById(Long itemId) {
+    public ItemDto getItemById(long itemId) {
         return itemMapper.toItemDto(itemStorage.getItemById(itemId));
     }
 
     @Override
-    public List<ItemDto> getUserItems(Long userId) {
+    public List<ItemDto> getUserItems(long userId) {
         return itemStorage.getUserItems(userId)
                 .stream()
                 .map(ItemMapper::toItemDto)
@@ -64,7 +64,7 @@ public class ItemServiceImpl implements ItemService {
                 .collect(Collectors.toList());
     }
 
-    private void checkUser(Long userId) {
+    private void checkUser(long userId) {
         if (userStorage.getUserById(userId) == null) {
             throw new UserNotFoundException("Пользователь не найден");
         }

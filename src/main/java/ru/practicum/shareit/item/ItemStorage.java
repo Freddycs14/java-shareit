@@ -9,9 +9,9 @@ public interface ItemStorage {
 
     Item update(Item item);
 
-    Item getItemById(Long itemId);
+    Item getItemById(long itemId);
 
-    List<Item> getUserItems(Long userId);
+    List<Item> getUserItems(long userId);
 
     List<Item> searchItems(String search);
 }

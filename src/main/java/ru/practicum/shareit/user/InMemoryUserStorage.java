@@ -12,9 +12,9 @@ import java.util.*;
 @Slf4j
 public class InMemoryUserStorage implements UserStorage {
     private final Map<Long, User> users = new HashMap<>();
-    private Long id = 1L;
+    private long id = 1;
 
-    private Long getNextId() {
+    private long getNextId() {
         return id++;
     }
 
@@ -43,13 +43,13 @@ public class InMemoryUserStorage implements UserStorage {
     }
 
     @Override
-    public void remove(Long userId) {
+    public void remove(long userId) {
         checkId(userId);
         users.remove(userId);
     }
 
     @Override
-    public User getUserById(Long userId) {
+    public User getUserById(long userId) {
         checkId(userId);
         return users.get(userId);
     }
@@ -66,7 +66,7 @@ public class InMemoryUserStorage implements UserStorage {
         }
     }
 
-    private boolean emailExist(Long userId, String email) {
+    private boolean emailExist(long userId, String email) {
         if (!users.isEmpty()) {
             if (users.values().stream().anyMatch(user -> user.getEmail().equals(email))) {
                 if (users.get(userId) != null && users.get(userId).getEmail().equals(email)) {

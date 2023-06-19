@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class ItemDto {
-    private Long id;
+    private long id;
     @NotEmpty
     private String name;
     @NotEmpty

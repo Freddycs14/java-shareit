@@ -14,7 +14,7 @@ import ru.practicum.shareit.user.model.User;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Builder
 public class Item {
-    private Long id;
+    private long id;
     private String name;
     private String description;
     private Boolean available;

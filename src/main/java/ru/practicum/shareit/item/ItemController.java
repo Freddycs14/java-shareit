@@ -17,23 +17,23 @@ public class ItemController {
     private final ItemService service;
 
     @PostMapping
-    public ItemDto create(@RequestHeader("X-Sharer-User-Id") Long userId, @Valid @RequestBody ItemDto itemDto) {
+    public ItemDto create(@RequestHeader("X-Sharer-User-Id") long userId, @Valid @RequestBody ItemDto itemDto) {
         return service.create(userId, itemDto);
     }
 
     @PatchMapping("/{itemId}")
-    public ItemDto update(@RequestHeader("X-Sharer-User-Id") Long userId, @RequestBody ItemDto itemDto, @PathVariable Long itemId) {
+    public ItemDto update(@RequestHeader("X-Sharer-User-Id") long userId, @RequestBody ItemDto itemDto, @PathVariable long itemId) {
         itemDto.setId(itemId);
         return service.update(itemId, userId, itemDto);
     }
 
     @GetMapping("/{itemId}")
-    public ItemDto getItemById(@PathVariable Long itemId) {
+    public ItemDto getItemById(@PathVariable long itemId) {
         return service.getItemById(itemId);
     }
 
     @GetMapping
-    public List<ItemDto> getItemsByUser(@RequestHeader("X-Sharer-User-Id") Long userId) {
+    public List<ItemDto> getItemsByUser(@RequestHeader("X-Sharer-User-Id") long userId) {
         return service.getUserItems(userId);
     }
 

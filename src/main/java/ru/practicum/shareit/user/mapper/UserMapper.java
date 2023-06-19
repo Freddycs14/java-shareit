@@ -7,7 +7,6 @@ import ru.practicum.shareit.user.dto.UserDto;
 @Component
 public final class UserMapper {
     private UserMapper() {
-
     }
 
     public static UserDto toUserDto(User user) {

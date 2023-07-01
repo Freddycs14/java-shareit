@@ -133,7 +133,7 @@ public class ItemServiceImpl implements ItemService {
                 .max(Comparator.comparing(Booking::getEnd))
                 .orElse(null);
 
-        if (lastBooking != null && item.getOwner().getId() == userId) {
+        if (lastBooking != null && item.getOwner().getId().equals(userId)) {
             itemWithBooking.setLastBooking(BookingMapper.toBookingForItemDto(lastBooking));
         } else {
             itemWithBooking.setLastBooking(null);
@@ -145,7 +145,7 @@ public class ItemServiceImpl implements ItemService {
                 .min(Comparator.comparing(Booking::getStart))
                 .orElse(null);
 
-        if (nextBooking != null && item.getOwner().getId() == userId && nextBooking.getStatus().equals(BookingStatus.APPROVED)) {
+        if (nextBooking != null && item.getOwner().getId().equals(userId) && nextBooking.getStatus().equals(BookingStatus.APPROVED)) {
             itemWithBooking.setNextBooking(BookingMapper.toBookingForItemDto(nextBooking));
         } else {
             itemWithBooking.setNextBooking(null);

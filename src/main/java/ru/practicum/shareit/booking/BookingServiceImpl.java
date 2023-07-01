@@ -71,7 +71,7 @@ public class BookingServiceImpl implements BookingService {
     public BookingDto getBooking(Long bookingId, Long userId) {
         Booking booking = bookingRepository.findById(bookingId).orElseThrow(() -> new BookingNotFoundException("Бронирование не найдено"));
         Item item = itemRepository.findById(booking.getItem().getId()).orElseThrow(() -> new ItemNotFoundException("Вещь не найдена"));
-        if (userId != item.getOwner().getId() && userId != booking.getBooker().getId()) {
+        if (!userId.equals(item.getOwner().getId()) && !userId.equals(booking.getBooker().getId())) {
             throw new UserNotFoundException("У данного пользователя нет прав для просмотра");
         }
         return BookingMapper.tBookingDto(booking);

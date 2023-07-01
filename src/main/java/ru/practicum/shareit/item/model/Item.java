@@ -1,23 +1,29 @@
 package ru.practicum.shareit.item.model;
 
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
-import ru.practicum.shareit.request.ItemRequest;
 import ru.practicum.shareit.user.model.User;
+
+import javax.persistence.*;
 
 /**
  * TODO Sprint add-controllers.
  */
+@Entity(name = "Items")
+@Table(name = "items")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Builder
 public class Item {
-    private long id;
-    private String name;
-    private String description;
-    private Boolean available;
-    private User owner;
-    private ItemRequest request;
+    @Id
+    Long id;
+    String name;
+    String description;
+    @Column(name = "is_available")
+    Boolean available;
+    @ManyToOne
+    @JoinColumn(name = "users_id")
+    User owner;
 }

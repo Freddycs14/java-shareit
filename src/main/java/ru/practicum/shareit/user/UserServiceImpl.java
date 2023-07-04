@@ -2,6 +2,7 @@ package ru.practicum.shareit.user;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.shareit.exception.UserNotFoundException;
 import ru.practicum.shareit.exception.ValidationException;
 import ru.practicum.shareit.user.model.User;
@@ -11,9 +12,9 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class UserServiceImpl implements UserService {
     private final UserRepository repository;
-    private Long id = 1L;
 
     @Override
     public User create(User user) {
@@ -21,7 +22,6 @@ public class UserServiceImpl implements UserService {
             throw new ValidationException("Неверные данные пользователя");
         }
         checkUser(user);
-        user.setId(getNextId());
         repository.save(user);
         return user;
     }
@@ -46,17 +46,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public User getUserById(Long userId) {
         return repository.findById(userId).orElseThrow(() -> new UserNotFoundException("Пользватель не найден"));
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<User> getAllUser() {
         return repository.findAll();
-    }
-
-    private long getNextId() {
-        return id++;
     }
 
     private boolean checkUser(User user) {

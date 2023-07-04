@@ -39,4 +39,10 @@ public class ErrorHandler {
         log.info("Ошибка 404");
         return new ErrorResponse("error", e.getMessage());
     }
+    @ExceptionHandler(OtherException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public ErrorResponse handleOtherException(final Throwable e) {
+        log.info("Ошибка 500");
+        return new ErrorResponse("error", e.getMessage());
+    }
 }

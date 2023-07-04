@@ -1,5 +1,6 @@
 package ru.practicum.shareit.booking;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import ru.practicum.shareit.user.model.User;
@@ -18,9 +19,9 @@ public interface BookingRepository extends JpaRepository<Booking, Long> {
             "order by b.start desc")
     List<Booking> findCurrentBookerBookings(Long userId, LocalDateTime now);
 
-    List<Booking> findAllByBookerIdAndStartIsAfter(Long userId, LocalDateTime now);
+    List<Booking> findAllByBookerIdAndStartIsAfter(Long userId, LocalDateTime now, Sort sort);
 
-    List<Booking> findAllByBookerIdAndEndIsBefore(Long userId, LocalDateTime now);
+    List<Booking> findAllByBookerIdAndEndIsBefore(Long userId, LocalDateTime now, Sort sort);
 
     //Получение списка бронирований для всех вещей текущего пользователя
     List<Booking> findAllByItemOwnerIdOrderByStartDesc(Long userId);
@@ -32,14 +33,14 @@ public interface BookingRepository extends JpaRepository<Booking, Long> {
             "order by b.start asc")
     List<Booking> findBookingsByItemOwnerCurrent(Long userId, LocalDateTime now);
 
-    List<Booking> findAllByItemOwnerIdAndStartIsAfter(Long userId, LocalDateTime start);
+    List<Booking> findAllByItemOwnerIdAndStartIsAfter(Long userId, LocalDateTime start, Sort sort);
 
-    List<Booking> findAllByItemOwnerIdAndEndIsBefore(Long userId, LocalDateTime end);
+    List<Booking> findAllByItemOwnerIdAndEndIsBefore(Long userId, LocalDateTime end, Sort sort);
 
 
-    List<Booking> findAllByBookerAndStatusEqualsOrderByStartDesc(User user, BookingStatus status);
+    List<Booking> findAllByBookerAndStatusEquals(User user, BookingStatus status, Sort sort);
 
-    List<Booking> findAllByItem_OwnerAndStatusEqualsOrderByStartDesc(User user, BookingStatus status);
+    List<Booking> findAllByItem_OwnerAndStatusEquals(User user, BookingStatus status, Sort sort);
 
-    Booking findFirstByBookerIdAndItemIdAndEndIsBeforeOrderByEndDesc(long userId, long itemId, LocalDateTime now);
+    Booking findFirstByBookerIdAndItemIdAndEndIsBefore(long userId, long itemId, LocalDateTime now, Sort sort);
 }

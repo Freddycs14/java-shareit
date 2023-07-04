@@ -20,6 +20,7 @@ import java.time.LocalDateTime;
 public class Booking {
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     @Column(name = "start_date")
     LocalDateTime start;

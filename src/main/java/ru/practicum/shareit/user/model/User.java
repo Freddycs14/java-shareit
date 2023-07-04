@@ -3,9 +3,7 @@ package ru.practicum.shareit.user.model;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
@@ -21,6 +19,7 @@ import javax.validation.constraints.NotNull;
 public class User {
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     String name;
     @NotNull

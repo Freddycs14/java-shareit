@@ -34,9 +34,9 @@ public final class BookingMapper {
                 .build();
     }
 
-    public static Booking toBookingDtoCreate(BookingDtoCreate bookingDtoCreate, Long id, Item item, User booker) {
+    public static Booking toBookingDtoCreate(BookingDtoCreate bookingDtoCreate, Item item, User booker) {
         return Booking.builder()
-                .id(id)
+                .id(bookingDtoCreate.getId())
                 .start(bookingDtoCreate.getStart())
                 .end(bookingDtoCreate.getEnd())
                 .item(item)

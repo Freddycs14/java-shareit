@@ -18,6 +18,7 @@ import javax.persistence.*;
 @Builder
 public class Item {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     String name;
     String description;

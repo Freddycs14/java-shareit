@@ -1,7 +1,7 @@
 package ru.practicum.shareit.exception;
 
 public class UserNotFoundException extends RuntimeException {
-    public UserNotFoundException(final String massage) {
-        super(massage);
+    public UserNotFoundException(final String message) {
+        super(message);
     }
 }

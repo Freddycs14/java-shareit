@@ -1,11 +1,9 @@
 package ru.practicum.shareit.item.mapper;
 
-import org.springframework.stereotype.Component;
 import ru.practicum.shareit.item.dto.ItemDto;
 import ru.practicum.shareit.item.model.Item;
 import ru.practicum.shareit.user.model.User;
 
-@Component
 public final class ItemMapper {
     private ItemMapper() {
     }
@@ -29,7 +27,7 @@ public final class ItemMapper {
                 .build();
     }
 
-    public static Item toItem(long id, ItemDto itemDto, User owner) {
+    public static Item toItem(Long id, ItemDto itemDto, User owner) {
         return Item.builder()
                 .id(id)
                 .name(itemDto.getName())

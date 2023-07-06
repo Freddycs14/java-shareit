@@ -1,30 +1,29 @@
-package ru.practicum.shareit.item.model;
+package ru.practicum.shareit.item.comment.model;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import ru.practicum.shareit.item.model.Item;
 import ru.practicum.shareit.user.model.User;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
-/**
- * TODO Sprint add-controllers.
- */
-@Entity(name = "Items")
-@Table(name = "items")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity(name = "comments")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Builder
-public class Item {
+public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    String name;
-    String description;
-    @Column(name = "is_available")
-    Boolean available;
+    String text;
+    @ManyToOne
+    @JoinColumn(name = "items_id")
+    Item item;
     @ManyToOne
     @JoinColumn(name = "users_id")
-    User owner;
+    User user;
+    LocalDateTime created;
 }

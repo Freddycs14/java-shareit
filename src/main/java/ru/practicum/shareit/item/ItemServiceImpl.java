@@ -130,10 +130,10 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public List<ItemDto> getItemsByRequestId (Long itemRequestId) {
+    public List<ItemDto> getItemsByRequestId(Long itemRequestId) {
         List<Item> items = itemRepository.findAll()
                 .stream()
-                .filter(s->s.getRequestId() != null && s.getRequestId().equals(itemRequestId))
+                .filter(s -> s.getRequestId() != null && s.getRequestId().equals(itemRequestId))
                 .collect(toList());
         return addBookingAndComments(items, LocalDateTime.now(), null);
     }

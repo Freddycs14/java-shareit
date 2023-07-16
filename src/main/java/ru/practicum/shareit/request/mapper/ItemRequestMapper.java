@@ -11,6 +11,7 @@ import java.util.List;
 public final class ItemRequestMapper {
     private ItemRequestMapper() {
     }
+
     public static ItemRequestDto toItemRequestDto(ItemRequest itemRequest, List<ItemDto> items) {
         return ItemRequestDto.builder()
                 .id(itemRequest.getId())

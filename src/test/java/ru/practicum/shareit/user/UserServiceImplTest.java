@@ -9,6 +9,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import ru.practicum.shareit.exception.EmailDuplicateException;
 import ru.practicum.shareit.exception.UserNotFoundException;
 import ru.practicum.shareit.user.model.User;
+
 import static org.junit.Assert.*;
 
 import java.util.List;
@@ -44,7 +45,7 @@ public class UserServiceImplTest {
     }
 
     @Test
-    public void shouldUpdateUserThrow(){
+    public void shouldUpdateUserThrow() {
         User user = User.builder().id(1L).name("Walter").email("w.white@gmail.com").build();
         Long userId = 0L;
         Mockito.when((userRepository.findById(userId))).thenReturn(Optional.empty());
@@ -53,14 +54,14 @@ public class UserServiceImplTest {
     }
 
     @Test
-    public void shouldDeleteUser(){
+    public void shouldDeleteUser() {
         long userId = 1L;
         userService.remove(userId);
         Mockito.verify(userRepository, Mockito.times(1)).deleteById(userId);
     }
 
     @Test
-    public void shouldGetAllUser(){
+    public void shouldGetAllUser() {
         User user = User.builder().id(1L).name("Walter").email("w.white@gmail.com").build();
         List<User> users = List.of(user);
         Mockito.when(userRepository.findAll()).thenReturn(users);
@@ -69,7 +70,7 @@ public class UserServiceImplTest {
     }
 
     @Test
-    public void shouldGetUserById(){
+    public void shouldGetUserById() {
         User user = User.builder().id(1L).name("Walter").email("w.white@gmail.com").build();
         Mockito.when(userRepository.findById(user.getId())).thenReturn(Optional.of(user));
         User result = userService.getUserById(user.getId());
@@ -77,7 +78,7 @@ public class UserServiceImplTest {
     }
 
     @Test
-    public void shouldGetUserByIdThrow(){
+    public void shouldGetUserByIdThrow() {
         Long userId = 0L;
         Mockito.when(userRepository.findById(userId)).thenReturn(Optional.empty());
         assertThrows(UserNotFoundException.class, () -> userService.getUserById(userId));

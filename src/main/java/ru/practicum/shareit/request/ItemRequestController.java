@@ -19,6 +19,7 @@ import java.util.List;
 @RequestMapping(path = "/requests")
 public class ItemRequestController {
     private ItemRequestService itemRequestService;
+
     @Autowired
     public ItemRequestController(ItemRequestService itemRequestService) {
         this.itemRequestService = itemRequestService;
@@ -32,7 +33,7 @@ public class ItemRequestController {
     }
 
     @GetMapping
-    public List<ItemRequestDto> getUserRequests (@RequestHeader("X-Sharer-User-Id") Long userId) {
+    public List<ItemRequestDto> getUserRequests(@RequestHeader("X-Sharer-User-Id") Long userId) {
         log.info("Получение списка запросов пользователя");
         return itemRequestService.getUserRequest(userId);
     }

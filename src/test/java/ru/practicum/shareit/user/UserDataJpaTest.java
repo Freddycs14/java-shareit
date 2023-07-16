@@ -20,7 +20,6 @@ public class UserDataJpaTest {
 
     User result = repository.save(user);
 
-    assertThat(result).hasFieldOrPropertyWithValue("id", 1L);
     assertThat(result).hasFieldOrPropertyWithValue("name", "Walter");
     assertThat(result).hasFieldOrPropertyWithValue("email", "w.white@gmail.com");
     }

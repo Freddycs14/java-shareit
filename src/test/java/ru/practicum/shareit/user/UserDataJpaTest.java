@@ -16,7 +16,7 @@ public class UserDataJpaTest {
 
     @Test
     public void createUserTest() {
-    User user = User.builder().id(1L).name("Walter").email("w.white@gmail.com").build();
+    User user = User.builder().name("Walter").email("w.white@gmail.com").build();
 
     User result = repository.save(user);
 

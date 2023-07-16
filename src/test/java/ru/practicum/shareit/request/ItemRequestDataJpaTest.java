@@ -27,7 +27,7 @@ public class ItemRequestDataJpaTest {
 
     @BeforeEach
     void setUp() {
-        user = User.builder().id(1L).name("Walter").email("w.white@gmail.com").build();
+        user = User.builder().name("Walter").email("w.white@gmail.com").build();
         userRepository.save(user);
         itemRequest = ItemRequest.builder().description("blue ice").requestor(user).created(LocalDateTime.now()).build();
         itemRequestRepository.save(itemRequest);

@@ -33,7 +33,7 @@ public class ErrorHandler {
     }
 
     @ExceptionHandler({UserNotFoundException.class, ItemNotFoundException.class,
-            BookingNotFoundException.class, CommentException.class})
+            BookingNotFoundException.class, CommentException.class, ItemRequestNotFoundException.class})
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ErrorResponse handleChangeException(final RuntimeException e) {
         log.info("Ошибка 404");

@@ -14,7 +14,7 @@ public final class BookingMapper {
     private BookingMapper() {
     }
 
-    public static BookingDto tBookingDto(Booking booking) {
+    public static BookingDto toBookingDto(Booking booking) {
         return BookingDto.builder()
                 .id(booking.getId())
                 .start(booking.getStart())

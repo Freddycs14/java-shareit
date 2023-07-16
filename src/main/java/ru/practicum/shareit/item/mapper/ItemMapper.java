@@ -14,6 +14,7 @@ public final class ItemMapper {
                 .name(item.getName())
                 .description(item.getDescription())
                 .available(item.getAvailable())
+                .requestId(item.getRequestId())
                 .build();
     }
 
@@ -24,16 +25,7 @@ public final class ItemMapper {
                 .description(itemDto.getDescription())
                 .available(itemDto.getAvailable())
                 .owner(owner)
-                .build();
-    }
-
-    public static Item toItem(Long id, ItemDto itemDto, User owner) {
-        return Item.builder()
-                .id(id)
-                .name(itemDto.getName())
-                .description(itemDto.getDescription())
-                .available(itemDto.getAvailable())
-                .owner(owner)
+                .requestId(itemDto.getRequestId())
                 .build();
     }
 }

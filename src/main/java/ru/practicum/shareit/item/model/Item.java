@@ -19,12 +19,17 @@ import javax.persistence.*;
 public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     Long id;
+    @Column(name = "name")
     String name;
+    @Column(name = "description")
     String description;
     @Column(name = "is_available")
     Boolean available;
     @ManyToOne
     @JoinColumn(name = "users_id")
     User owner;
+    @Column(name = "requests_id")
+    Long requestId;
 }

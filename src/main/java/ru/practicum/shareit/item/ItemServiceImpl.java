@@ -2,6 +2,8 @@ package ru.practicum.shareit.item;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -89,22 +91,24 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<ItemDto> getUserItems(Long userId) {
+    public List<ItemDto> getUserItems(Long userId, int from, int size) {
         if (userId == null) {
             throw new ValidationException("Id владельца не указан");
         }
-        List<Item> items = itemRepository.findItemByOwnerId(userId);
+        Pageable page = PageRequest.of(from / size, size);
+        List<Item> items = itemRepository.findItemByOwnerId(userId, page);
         List<ItemDto> itemsDto = addBookingAndComments(items, LocalDateTime.now(), userId);
         return itemsDto;
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<ItemDto> searchItems(String text) {
+    public List<ItemDto> searchItems(String text, int from, int size) {
         if (text.isEmpty()) {
             return new ArrayList<>();
         }
-        List<Item> items = itemRepository.search(text).stream()
+        Pageable page = PageRequest.of(from / size, size);
+        List<Item> items = itemRepository.search(text, page).stream()
                 .filter(Item::getAvailable)
                 .collect(toList());
         return addBookingAndComments(items, LocalDateTime.now(), null);
@@ -123,6 +127,15 @@ public class ItemServiceImpl implements ItemService {
         } else {
             throw new ValidationException("Пользователь не заказывал эту вещь");
         }
+    }
+
+    @Override
+    public List<ItemDto> getItemsByRequestId(Long itemRequestId) {
+        List<Item> items = itemRepository.findAll()
+                .stream()
+                .filter(s -> s.getRequestId() != null && s.getRequestId().equals(itemRequestId))
+                .collect(toList());
+        return addBookingAndComments(items, LocalDateTime.now(), null);
     }
 
     private List<ItemDto> addBookingAndComments(List<Item> items, LocalDateTime now, Long userId) {

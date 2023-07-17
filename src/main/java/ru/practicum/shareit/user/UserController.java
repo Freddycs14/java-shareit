@@ -33,7 +33,7 @@ public class UserController {
     public UserDto update(@PathVariable Long userId, @RequestBody UserDto userDto) {
         log.info("Получен запрос на обновление пользователя с id={}", userId);
         userDto.setId(userId);
-        User user = service.update(UserMapper.toUser(userId, userDto));
+        User user = service.update(userId, UserMapper.toUser(userId, userDto));
         return UserMapper.toUserDto(user);
     }
 

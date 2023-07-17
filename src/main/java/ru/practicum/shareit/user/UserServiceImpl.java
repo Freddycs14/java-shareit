@@ -7,7 +7,6 @@ import ru.practicum.shareit.exception.UserNotFoundException;
 import ru.practicum.shareit.exception.ValidationException;
 import ru.practicum.shareit.user.model.User;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @Service
@@ -27,9 +26,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User update(User user) {
+    public User update(Long userId, User user) {
         checkUser(user);
-        User updateUser = repository.findById(user.getId()).orElseThrow(() -> new EntityNotFoundException("Пользватель не найден"));
+        User updateUser = repository.findById(userId).orElseThrow(() -> new UserNotFoundException("Пользватель не найден"));
         if (user.getName() != null) {
             updateUser.setName(user.getName());
         }
